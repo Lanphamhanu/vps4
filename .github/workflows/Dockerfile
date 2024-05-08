@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y wget unzip && \
     unzip ngrok-v3-stable-linux-amd64.zip
 
 # Set ngrok authentication token
-ENV NGROK_AUTH_TOKEN="YOUR_NGROK_AUTH_TOKEN"
+ENV NGROK_AUTH_TOKEN="2g7quk8KMZh9TzgpeSxH3d8N0KK_2iCyDFFJqydiWzwL6FrVN"
 
 # Enable Terminal Server connections
 RUN apt-get update && apt-get install -y net-tools && \
