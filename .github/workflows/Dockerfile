@@ -2,7 +2,8 @@
 FROM python:3.9-slim
 
 # Download and extract ngrok
-RUN apt-get update && apt-get install -y wget unzip && \
+RUN apt-get update && \
+    apt-get install -y wget unzip && \
     wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip && \
     unzip ngrok-v3-stable-linux-amd64.zip
 
@@ -10,14 +11,14 @@ RUN apt-get update && apt-get install -y wget unzip && \
 ENV NGROK_AUTH_TOKEN="2g7quk8KMZh9TzgpeSxH3d8N0KK_2iCyDFFJqydiWzwL6FrVN"
 
 # Install required packages
-RUN apt-get update && apt-get install -y \
-    net-tools \
-    procps \
-    iproute2 \
-    iputils-ping \
-    lsof \
-    openssh-server \
-    sudo && \
+RUN apt-get update && \
+    apt-get install -y net-tools && \
+    apt-get install -y procps && \
+    apt-get install -y iproute2 && \
+    apt-get install -y iputils-ping && \
+    apt-get install -y lsof && \
+    apt-get install -y openssh-server && \
+    apt-get install -y sudo && \
     apt-get clean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
