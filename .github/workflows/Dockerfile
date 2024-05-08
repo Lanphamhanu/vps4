@@ -9,26 +9,27 @@ RUN apt-get update && apt-get install -y wget unzip && \
 # Set ngrok authentication token
 ENV NGROK_AUTH_TOKEN="2g7quk8KMZh9TzgpeSxH3d8N0KK_2iCyDFFJqydiWzwL6FrVN"
 
-# Enable Terminal Server connections
-RUN apt-get update && apt-get install -y net-tools && \
-    apt-get install -y procps && \
-    apt-get install -y iproute2 && \
-    apt-get install -y iputils-ping && \
-    apt-get install -y lsof && \
-    apt-get install -y openssh-server && \
-    apt-get install -y sudo && \
+# Install required packages
+RUN apt-get update && apt-get install -y \
+    net-tools \
+    procps \
+    iproute2 \
+    iputils-ping \
+    lsof \
+    openssh-server \
+    sudo && \
     apt-get clean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
-    sudo systemctl enable ssh && \
-    sudo systemctl start ssh
+    systemctl enable ssh && \
+    systemctl start ssh
 
 # Set up a user for RDP
 RUN useradd -m rdpuser && \
     echo "rdpuser:P@ssw0rd!" | chpasswd && \
     adduser rdpuser sudo && \
     echo "rdpuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/rdpuser && \
-    sudo service ssh start
+    service ssh start
 
 # Start ngrok tunnel
 CMD ["./ngrok", "tcp", "3389"]
